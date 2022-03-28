@@ -1,20 +1,44 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
+import ListPizza from './components/ListPizza';
+import PizzaDetail from './components/PizzaDetail';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='home'>
+          {
+            (props) => {
+              return (
+                <SafeAreaView style={styles.container} >
+                  <ListPizza {...props} />
+                </SafeAreaView>
+              )
+            }
+          }
+        </Stack.Screen>
+        <Stack.Screen name="pizzaDetail" component={PizzaDetail} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // flexDirection: 'row',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
+  volume: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'black'
+  }
 });
