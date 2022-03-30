@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Button } from 'react-native'
 
-const PizzaDetail = () => {
-
+const PizzaDetail = ({ route, navigation }) => {
+    const pizza = route.params.pizza
     return (
         <View style={styles.container}>
             <Image
@@ -13,10 +13,13 @@ const PizzaDetail = () => {
             <Text>Prix: 11€</Text>
             <Text>Ingedients:</Text>
             <View style={[styles.main, styles.liste]}>
-                <Text>Ingedients</Text>
-                <Text>Ingedients</Text>
-                <Text>Ingedients</Text>
+                {pizza.ingredients.map(
+                    (ingredient, index) =>
+                        <Text key={index}>{ingredient}</Text>
+                )
+                }
             </View>
+            <Button title='Retour' onPress={() => navigation.goBack()} />
         </View>
     );
 
